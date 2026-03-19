@@ -3,28 +3,28 @@ import smtplib
 import ssl
 
 # -----------------------------
-# SÄHKÖPOSTIN LÄHETYSFUNKTIO
+# -----------------------------
 # -----------------------------
 def send_email(email_to, subject, message):
-    # 1. Rakenna sähköpostiviesti
+    # 1. build gmail message
     msg = MIMEText(message)
     msg["From"] = "OWN_GMAIL_OSOITE"
     msg["To"] = email_to
     msg["Subject"] = subject
 
-    # 2. Avaa Gmail-yhteys (SSL)
+    # 2. open gmail (SSL)
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
 
-        # 3. Kirjaudu sisään Gmailiin (käytä SOVELLUSSALASANAA)
+        # 3. login to gmail (USE GMAIL APP PASSWORD)
         server.login("gmail address here", "gmail password here")
 
-        # 4. Lähetä viesti
+        # 4. Send message
         server.sendmail("OWN_GMAIL_OSOITE", email_to, msg.as_string())
 
 
 # -----------------------------
-# PÄÄOHJELMA
+# Main
 # -----------------------------
 print("EMAIL SENDER")
 print("")
